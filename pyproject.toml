@@ -14,9 +14,11 @@ dependencies = [
     "flask-sqlalchemy (>=3.1.1,<4.0.0)",
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "flask-migrate (>=4.1.0,<5.0.0)",
-    "pytest (>=8.4.1,<9.0.0)",
     "pydantic (>=2.11.7,<3.0.0)"
 ]
+
+[tool.poetry]
+package-mode = false
 
 [tool.pytest.ini_options]
 python_files = "tests.py test_*.py *_tests.py"
@@ -26,6 +28,7 @@ cache_dir = ".venv/cache/pytest"
 
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
+pytest = "^8.4.1"
 
 [tool.black]
 line-length = 79

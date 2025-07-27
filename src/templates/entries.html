@@ -30,10 +30,6 @@
 
   <p><a href="{{ url_for('entries.upload') }}">Upload another file</a></p>
 
-  <script>
-    $(document).ready(function () {
-      $('#entriesTable').DataTable();
-    });
-  </script>
+  <script src="{{ url_for('static', filename='js/init.js') }}" defer></script>
 </body>
 </html>

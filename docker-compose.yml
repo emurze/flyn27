@@ -11,8 +11,34 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  flyn27:
+    build: .
+    image: referral-platform:v1
+    volumes:
+      - app_static:/service/src/static
+    networks:
+      - backend
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  web_server:
+    image: 'nginx:alpine3.18'
+    networks:
+      - backend
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf
+      - app_static:/srv/static
+    ports:
+      - '80:80'
+    restart: unless-stopped
+    depends_on:
+      - flyn27
+
 volumes:
   postgres_data:
+  app_static:
 
 networks:
   backend:

@@ -11,25 +11,22 @@ sys.path.insert(
 )
 
 from app import create_app
-from records.models import db as _db
+from models import db as _db
 
 
 @pytest.fixture
 def app() -> Iterator[Flask]:
     app = create_app()
     app.config.update(
-        {  # TODO
+        {
             "TESTING": True,
-            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-            "SQLALCHEMY_TRACK_MODIFICATIONS": False,
-            "SECRET_KEY": "test",
         }
     )
 
     with app.app_context():
+        _db.drop_all()
         _db.create_all()
         yield app
-        _db.drop_all()
 
 
 @pytest.fixture

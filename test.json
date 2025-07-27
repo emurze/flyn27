@@ -1,11 +1,10 @@
 [
   {
-    "name": "Sample entry less than fifty character3233333333333333zcharacter3233333333333333zcharacter3233333333333333zcharacter3233333333333333z",
-    "date": "2025-07-2714:30"
+    "name": "Sample entry less than fifty characters"
   },
   {
-    "name": "Another example with a valid date sting",
-    "date": "2024-12-0109:15"
+    "name": "Another example with a valid date string",
+    "date": "2024-12-01_09:15"
   },
   {
     "name": "Short name",

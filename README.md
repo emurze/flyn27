@@ -1,11 +1,87 @@
-* Add pydantic +
-* Write normal commits +
-* Refactor sqlalchemy models and make name unique +
-* Refactor html files and write css +
-* Move all jquery and css to static directory +
-* Add error handlers +
-* Add tests +
-* Add docker with nginx and postgres +
+# Flyn27
 
-* Solve problem with static -
-* Write docs in README -
+Веб-приложение для удобной загрузки и просмотра структурированных данных из 
+JSON-файлов. Позволяет пользователям загрузить данные и в дальнейшем быстро 
+их просматривать.
+
+## Начало работы
+
+### Требования
+
+Перед началом убедитесь, что на вашем компьютере установлены:
+
+- Python 3.12 или выше
+- Docker – [https://www.docker.com/](https://www.docker.com/)
+- Poetry – [https://python-poetry.org/](https://python-poetry.org/)
+
+### Инструкция по установке
+
+#### 1. Клонирование репозитория с GitHub
+
+Сначала склонируйте репозиторий на ваш компьютер с помощью Git:
+
+```bash
+https://github.com/emurze/flyn27.git
+```
+
+Перейдите в папку проекта:
+
+```bash
+cd flyn27
+```
+
+#### 2. Установка зависимостей с помощью Poetry
+
+Убедитесь, что у вас установлен Poetry. Если нет, установите его, следуя инструкции на официальном сайте:
+https://python-poetry.org/docs/#installation
+
+Затем установите все зависимости проекта, включая зависимости для разработки:
+
+```bash
+poetry install --with dev
+```
+
+#### 3. Настройка файла окружения
+
+Создайте файл конфигурации .env для определения переменных окружения. Например:
+
+```bash
+touch .env
+```
+
+Пример содержимого файла .env:
+
+```ini
+# Application settings
+PYTHONPATH = src
+FLASK_APP = src.app
+SECRET_KEY = secret_key  # Insert your own secret key here
+
+# PostgreSQL settings
+POSTGRES_DB = db
+POSTGRES_USER = user
+POSTGRES_PASSWORD = 12345678
+POSTGRES_HOST = db
+```
+
+#### 4. Запуск приложения в режиме продакшн
+
+Для запуска приложения в режиме продакшн выполните следующую команду:
+
+```bash
+docker compose -p flyn27 up --build
+```
+
+Эта команда соберёт образ приложения и запустит все необходимые контейнеры.
+После запуска приложение будет доступно по адресу: http://0.0.0.0:80
+
+#### 5. В случае проблем
+
+Если при запуске возникнут проблемы, возможно, уже работают Docker-контейнеры, которые конфликтуют с этой конфигурацией.
+Чтобы остановить и удалить все продакшн-контейнеры, используйте команду:
+
+```bash
+docker compose -p flyn27 down -v
+```
+
+Это удалит все контейнеры и данные, созданные для продакшн-окружения.

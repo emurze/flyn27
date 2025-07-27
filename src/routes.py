@@ -19,6 +19,19 @@ bp = Blueprint("entries", __name__)
 
 @bp.route("/", methods=["GET", "POST"])
 def upload() -> str | Response:
+    """
+    Handle the upload of a JSON file containing entry data.
+
+    - GET: Render the upload form.
+    - POST: Process the uploaded JSON file.
+        - Validates each item using EntryRead schema.
+        - Collects validation errors and flashes them to the user.
+        - On success, stores the validated entries via the services layer.
+
+    Returns:
+        - Rendered upload template (GET)
+        - Redirect to upload or entries view (POST)
+    """
     if request.method == "POST":
         file = request.files.get("json_file")
         if not file:
@@ -59,5 +72,14 @@ def upload() -> str | Response:
 
 @bp.route("/entries")
 def get_entries() -> str:
+    """
+    Display all uploaded entries in a table view.
+
+    Fetches the data from the services layer and renders it
+    using the 'entries.html' template.
+
+    Returns:
+        Rendered template with the list of entries.
+    """
     entries = services.get_entries()
     return render_template("entries.html", entries=entries)

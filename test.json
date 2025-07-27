@@ -1,8 +1,5 @@
 [
   {
-    "name": "Sample entry less than fifty characters"
-  },
-  {
     "name": "Another example with a valid date string",
     "date": "2024-12-01_09:15"
   },

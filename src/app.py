@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, Response
+from flask import Flask
 
 import os
 import sys
 
+from werkzeug.middleware.proxy_fix import ProxyFix
+
+# Add the source directory to the Python path
 sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "."))
 )
@@ -22,11 +25,7 @@ def create_app() -> Flask:
     db.init_app(flask_app)
     migrate.init_app(flask_app, db)
 
-    @flask_app.route("/")
-    def check_health() -> tuple[Response, int]:
-        """Respond to health check requests."""
-        return jsonify({"status": "ok"}), 200
-
+    flask_app.wsgi_app = ProxyFix(flask_app.wsgi_app, x_for=1, x_proto=1)
     return flask_app
 
 

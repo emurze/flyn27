@@ -6,6 +6,8 @@ load_dotenv()
 
 
 class Config:
+    """Base configuration class for the Flask application."""
+
     SECRET_KEY = os.environ.get("SECRET_KEY", "secret")
 
     POSTGRES_USER = os.environ.get("POSTGRES_USER")

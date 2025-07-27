@@ -103,6 +103,7 @@ def test_cannot_upload_when_no_file_provided(client: FlaskClient):
 
 
 def test_cannot_upload_when_json_is_malformed(client: FlaskClient):
+    # act
     bad_json = b'[{"name": "Alice", "date": "2025-07-27_14:30"'
     response = client.post(
         "/",
@@ -110,4 +111,6 @@ def test_cannot_upload_when_json_is_malformed(client: FlaskClient):
         content_type="multipart/form-data",
         follow_redirects=True,
     )
+
+    # assert
     assert "Invalid JSON format." in str(response.data)

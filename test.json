@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Another example with a valid date string",
+    "date": "2024-12-01_09:15"
+  },
+  {
+    "name": "Short name",
+    "date": "2023-01-05_23:59"
+  }
+]

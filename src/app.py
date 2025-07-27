@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, Response
 
 from config import Config
-from records import records_bp
-from records.models import db, migrate
+from models import migrate, db
+from routes import bp
 
 
 def create_app() -> Flask:
@@ -10,7 +10,7 @@ def create_app() -> Flask:
 
     app = Flask(__name__)
     app.config.from_object(Config)
-    app.register_blueprint(records_bp)
+    app.register_blueprint(bp)
     db.init_app(app)
     migrate.init_app(app, db)
 

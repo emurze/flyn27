@@ -5,9 +5,12 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-class Record(db.Model):  # TODO: rename, declarative style
-    __tablename__ = "records"
+class Entry(db.Model):
+    __tablename__ = "entries"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"<Entry id={self.id} name={self.name} date={self.date}>"

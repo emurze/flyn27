@@ -1,3 +1,5 @@
+import io
+import json
 import os
 import sys
 from collections.abc import Iterator
@@ -5,6 +7,7 @@ from collections.abc import Iterator
 import pytest
 from flask import Flask
 from flask.testing import FlaskClient, FlaskCliRunner
+from werkzeug.test import TestResponse
 
 # Add the source directory to the Python path
 sys.path.insert(
@@ -36,3 +39,16 @@ def client(app: Flask) -> FlaskClient:
 def runner(app: Flask) -> FlaskCliRunner:
     """Provides a test CLI runner for invoking Flask CLI commands."""
     return app.test_cli_runner()
+
+
+def upload_json(client: FlaskClient, data: list[dict]) -> TestResponse:
+    """Upload a JSON file via POST"""
+    json_data = json.dumps(data)
+    return client.post(
+        "/",
+        data={
+            "json_file": (io.BytesIO(json_data.encode("utf-8")), "test.json")
+        },
+        content_type="multipart/form-data",
+        follow_redirects=True,
+    )

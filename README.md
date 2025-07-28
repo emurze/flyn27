@@ -40,7 +40,6 @@ touch .env
 
 ```ini
 # Application settings
-PYTHONPATH = src
 FLASK_APP = src.app
 SECRET_KEY = secret_key  # Insert your own secret key here
 

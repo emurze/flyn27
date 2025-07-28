@@ -1,0 +1,38 @@
+[project]
+name = "flyn27"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Alexey",email = "rozanov7475@yandex.by"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask (>=3.1.1,<4.0.0)",
+    "gunicorn (>=23.0.0,<24.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "flask-sqlalchemy (>=3.1.1,<4.0.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "flask-migrate (>=4.1.0,<5.0.0)",
+    "pydantic (>=2.11.7,<3.0.0)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[tool.pytest.ini_options]
+python_files = "tests.py test_*.py *_tests.py"
+addopts = ["-rsxX", "-l", "--tb=short", "--strict-markers"]
+markers = ["unit", "integration", "e2e"]
+cache_dir = ".venv/cache/pytest"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+pytest = "^8.4.1"
+
+[tool.black]
+line-length = 79
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
